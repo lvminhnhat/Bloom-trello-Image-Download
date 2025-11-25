@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*.enc
+*.key
+config.json
+*.spec
+dist/
+build/
