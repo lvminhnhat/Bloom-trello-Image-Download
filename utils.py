@@ -3,11 +3,12 @@ import re
 from cryptography.fernet import Fernet
 
 def sanitize_filename(name):
+    # Replace separators with underscores
+    name = name.replace('|', '_')
     # Remove invalid characters
-    name = re.sub(r'[<>:"/\\|?*]', '', name)
-    # Replace spaces with underscores (optional, but good for consistency)
-    # name = name.replace(' ', '_')
-    return name.strip()
+    name = re.sub(r'[<>:"/\\?*]', '', name)
+    # Limit length to avoid issues
+    return name.strip().rstrip('.')[:200]
 
 class Encryptor:
     def __init__(self, key_file="secret.key"):
